@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tela de Cadastro</title>
+  <link rel="stylesheet" href="/css/cadastro.css">
+</head>
+<body>
+  <div class="container">
+    <div class="imagem">
+      <img src="img/bomgesto2.png" alt="Imagem de mãos com coração">
+    </div>
+    <div class="formulario">
+      <h2>Cadastro</h2>
+      <p>Já tem cadastro? <a href="login.html">Login</a></p>
+
+      <form id="form-cadastro">
+        <label for="nome">Nome*</label>
+        <input type="text" id="nome" placeholder="Seu Nome" required>
+
+        <label for="email">Email*</label>
+        <input type="email" id="email" placeholder="seuemail@gmail.com" required>
+
+        <label for="senha">Senha*</label>
+        <div class="input-senha">
+          <input type="password" id="senha" required>
+          <button type="button" id="toggleSenha" class="botao-olho">👁️</button>
+        </div>
+
+        <label for="data">Data de Nascimento*</label>
+        <input type="date" id="data" required>
+
+        <button type="submit">Cadastrar</button>
+      </form>
+
+      <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+        const firebaseConfig = {
+        apiKey: "AIzaSyBPAy9KdIk8e34yruaL32wyj_MJANHlN2g",
+        authDomain: "bomgesto-15634.firebaseapp.com",
+        databaseURL: "https://bomgesto-15634-default-rtdb.firebaseio.com",
+        projectId: "bomgesto-15634",
+        storageBucket: "bomgesto-15634.firebasestorage.app",
+        messagingSenderId: "672802069001",
+        appId: "1:672802069001:web:356d0b5ab9ae09d29236d8"
+};
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        document.getElementById('form-cadastro').addEventListener('submit', async function (e) {
+          e.preventDefault();
+
+          const nome = document.getElementById('nome').value;
+          const email = document.getElementById('email').value;
+          const senha = document.getElementById('senha').value;
+          const dataNascimento = document.getElementById('data').value;
+
+          try {
+            const credenciais = await createUserWithEmailAndPassword(auth, email, senha);
+            const user = credenciais.user;
+
+            // Salva dados extras no banco
+            await set(ref(db, 'usuarios/' + user.uid), {
+              nome,
+              email,
+              dataNascimento,
+              criadoEm: new Date().toISOString()
+            });
+
+            alert("Usuário cadastrado com sucesso!");
+            window.location.href = "paginaPrincipal.html";
+          } catch (erro) {
+            console.error(erro);
+            alert("Erro ao cadastrar: " + erro.message);
+          }
+        });
+//Ocultar senha
+        const btnToggle = document.getElementById('toggleSenha');
+        const inputSenha = document.getElementById('senha');
+        btnToggle.addEventListener('click', () => {
+          const tipo = inputSenha.type === 'password' ? 'text' : 'password';
+          inputSenha.type = tipo;
+          btnToggle.textContent = tipo === 'password' ? '👁️' : '🙈';
+        });
+      </script>
+    </div>
+  </div>
+</body>
+</html>

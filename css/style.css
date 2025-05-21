@@ -1,0 +1,264 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+  }
+
+:root{
+    --p-color: #ac1414;
+    --s-color: #f9ecd9;
+    --t-color: white;
+    --q-color: #f4e1c6;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+body{
+    background-color: var(--p-color);
+    font-family: 'Poppins', sans-serif;
+}
+
+.hero {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--s-color);
+    color: black;
+    margin: 0;
+    font-size: 2.4rem;
+    padding: 20px;
+    min-height: 8vh;
+    font-weight: bold;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hero p {
+    font-style: italic;
+    color: var(--p-color);
+}
+
+.hero .logo-img {
+    width: 35px;
+    height: 35px;
+}
+
+.nav-menu {
+    display: flex;
+    font-size: 2rem;
+}
+
+.nav-menu ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.nav-menu ul li {
+    display: flex;
+}
+
+.nav-menu ul a {
+    padding: 5px 10px;
+    text-decoration: none;
+    color: var(--p-color);
+}
+
+.nav-menu ul li a:hover {
+    background-color: var(--p-color);
+    color: var(--t-color);
+    border-radius: 10px;
+}
+
+.nav-menu ul li a.login-bottom {
+    background-color: var(--p-color);
+    color: var(--t-color);
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-menu ul li a.login-bottom:hover {
+    background-color: #800000;
+}
+
+
+.inicio{
+    display: flex;
+    width: 100%;
+    height: 90vh;
+}
+
+.inicio article{
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    align-content: center;
+}
+
+.hashtag{
+    margin-left: 15px;
+    margin-bottom: 20px;
+    color: var(--p-color);
+    font-weight: bold;
+    font-size: 2rem;
+    background-color: var(--s-color);
+    width: fit-content;
+    padding: 5px 30px;
+    border-radius: 999px;
+}
+
+.inicio .introducao{
+    margin-left: 80px;
+}
+
+.introducao h2{
+    font-size: 3.2rem;
+    color: var(--s-color);
+    padding: 20px;
+}
+
+.introducao .text-intro{
+    color: var(--s-color);
+    padding: 20px;
+    font-size: 2.2rem;
+}
+
+.introducao-img{
+    text-align: center;
+      perspective: 800px;
+}
+
+.introducao-img img {
+    width: 450px; 
+    height: auto;
+    object-fit: cover;
+    clip-path: polygon(
+        20% 0%, 80% 0%,
+        100% 20%, 100% 80%,
+        80% 100%, 10% 80%,
+        0% 0%, 0% 0%
+    );
+    border-radius: 20px; 
+    box-shadow: 10px 15px 30px rgba(0, 0, 0, 0.5); /* sombra para profundidade */
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+  }
+  
+  .introducao-img img:hover {
+    transform: rotateY(15deg) rotateX(10deg) scale(1.05);
+    box-shadow: 20px 25px 50px rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+  }
+
+  .atalho {
+    margin: 20px;
+    background-color: var(--s-color);
+    border-radius: 999px;
+    width: fit-content;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    font-size: 1.6em;
+    color: black;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .atalho:hover {
+    background-color: #800000;
+    color: var(--t-color);
+    transform: scale(1.05);
+    cursor: pointer;
+    transform: scale(1.05) translateX(10px); /* aumenta e move 10px para a direita */
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease
+  }
+  
+  .seta {
+    background-color: var(--p-color);
+    padding: 10px;
+    font-size: 1.5rem;
+    color: white;
+    margin-left: 15px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .atalho:hover .seta {
+    background-color: var(--t-color);
+    color: var(--p-color);
+  }
+
+/* Locais de doação */
+
+.title-local {
+  margin: 40px auto 20px;
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--s-color);
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+label[for="tipoDoacao"] {
+  display: block;
+  max-width: 300px;
+  margin: 0 auto 15px;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: var(--s-color);
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#tipoDoacao {
+  display: block;
+  margin: 0 auto 35px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 2px solid var(--s-color);
+  font-size: 1rem;
+  width: 250px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #ffffffdd;
+  box-shadow: inset 1px 1px 5px #c8e6c9aa;
+}
+
+#map {
+      height: 500px;
+      width: 90%;
+      margin: 20px auto;
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}

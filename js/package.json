@@ -1,0 +1,17 @@
+
+{
+  "name": "projeto-bomgesto",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.0",
+    "firebase": "^9.0.0",
+    "firebase-admin": "^13.4.0"
+  }
+}

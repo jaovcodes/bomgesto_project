@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Mapa de Doações</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+    <header class="hero">
+        <div class="logo">
+        <p>BomGesto</p>
+        <img src="assets/icones/logobomgesto.png" alt="Mãos dadas" class="logo-img">
+        </div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="doacoes.html">Doações</a></li>
+                <li><a href="pontuacao.html">Pontuações</a></li>
+                <li><a href="locais.html">Locais de doação</a></li>
+                <li><a class="login-bottom" href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+  <h2 class="title-local">Encontre um local para doar</h2>
+
+  <label for="tipoDoacao">Filtrar por tipo de doação:</label>
+  <select id="tipoDoacao" onchange="filtrarLocais()">
+  <option value="todos">Todos</option>
+  <option value="sangue">Sangue</option>
+  <option value="roupas">Roupas</option>
+  <option value="racao">Ração</option>
+  <option value="alimentos">Alimentos</option>
+</select>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+  const locais = [
+    {
+      nome: "Hemoam",
+      lat: -3.0858451653305954,
+      lng: -60.02702149894994,
+      endereco: "Av. Cosntantino Nery, 1479, Chapada",
+      tipo: "sangue"
+    },
+    {
+      nome: "Associação Anjos de rua",
+      lat: -3.1001731277191635,
+      lng: -59.99968374641915,
+      endereco: "Tv Ouroeste, 2, Aleixo",
+      tipo: "racao"
+    },
+    {
+      nome: "Quatro patas",
+      lat: -3.068235804547113,
+      lng: -60.00037603426286,
+      endereco: "Av. Amazonas Calvacante",
+      tipo: "racao"
+    }
+  ];
+
+  let map;
+  let marcadores = [];
+
+  function inicializarMapa() {
+    map = L.map('map').setView([-3.1031, -60.0261], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> colaboradores'
+    }).addTo(map);
+
+    filtrarLocais(); 
+  }
+
+  function filtrarLocais() {
+    const tipoSelecionado = document.getElementById("tipoDoacao").value;
+    marcadores.forEach(marker => map.removeLayer(marker));
+    marcadores = [];
+
+    locais.forEach(local => {
+      if (tipoSelecionado === "todos" || local.tipo === tipoSelecionado) {
+        const marker = L.marker([local.lat, local.lng]).addTo(map);
+        marker.bindPopup(`<strong>${local.nome}</strong><br>${local.endereco}`);
+        marcadores.push(marker);
+      }
+    });
+  }
+
+  window.addEventListener("load", inicializarMapa);
+</script>
+</body>
+</html>
