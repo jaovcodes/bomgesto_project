@@ -10,13 +10,12 @@
 <body>
     
     <header class="hero">
-        <div class="logo">
+      <a href="index.html" class="logo">
         <p>BomGesto</p>
         <img src="assets/icones/logobomgesto.png" alt="Mãos dadas" class="logo-img">
-        </div>
+      </a>
         <nav class="nav-menu">
             <ul>
-                <li><a href="sobre.html">Sobre</a></li>
                 <li><a href="doacoes.html">Doações</a></li>
                 <li><a href="pontuacao.html">Pontuações</a></li>
                 <li><a href="locais.html">Locais de doação</a></li>
@@ -50,5 +49,113 @@
 
     </section>
 
+    <section class="parte-sobre">
+
+      <div class="container-sobre">
+  
+    <div class="img-sobre">
+      <img src="img/iconsobre.png" alt="Imagem" />
+    </div>
+
+    <div class="sobre">
+      <h1>O que é o <br><span>Bom Gesto?<span></h1>
+      <br><p>O BomGesto é um site para incentivar as doações por meio de pontuações e benefícios que oferecemos aos usuários a cada ação solidária que é feita.</p>
+    </div>
+
+  </div>
+    </section>
+
+<section class="pontuacoes-texto">
+  <h1>Sobre as Pontuações</h1>
+  <p class="subtitulo">Como funciona as Pontuações</p>
+
+  <div class="caixas-info">
+    <div class="caixa">
+      <h3>📌 Como você ganha pontos?</h3>
+      <ul>
+        <li>✅ Compartilhar nas redes sociais: <strong>10 pontos</strong></li>
+        <li>✅ Realizar doação: <strong>10 pontos</strong></li>
+        <li>✅ Indicar um amigo: <strong>10 pontos</strong></li>
+      </ul>
+    </div>
+
+    <div class="caixa">
+      <h3>📊 Níveis de doador</h3>
+      <ul>
+        <li>💙 Iniciante Solidário – até 10 pontos</li>
+        <li>💛 Aliado do Bem – de 20 a 30 pontos</li>
+        <li>❤️ Herói da Comunidade – 50 pontos</li>
+        <li>💎 Lenda da Esperança – acima de 100 pontos</li>
+      </ul>
+    </div>
+
+    <div class="caixa">
+      <h3>🎁 Recompensas simbólicas</h3>
+      <ul>
+        <li>📜 Um coração feliz pela doação</li>
+        <li>🏷️ Destaque em painéis do site</li>
+        <li>🎉 Nomes especiais nas redes</li>
+      </ul>
+    </div>
+
+    <div class="caixa">
+      <h3>📈 Acompanhe seu progresso</h3>
+      <ul>
+        <li>👤 Ver seu saldo de pontos</li>
+        <li>📆 Conferir o ranking</li>
+        <li>🔁 Aumentar o nome nas redes</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+    <footer class="footer">
+    <div class="container">
+    
+      <div class="contatos">
+        <h3>Contatos</h3>
+        <p>(92)9990-0000</p>
+        <p>BomGesto@gmail.com</p>
+        <a href="#">Instagram</a><br>
+        <a href="#">Facebook</a>
+      </div>
+  
+    
+      <div class="menu">
+        <h3>Menu</h3>
+        <a href="#">Sobre nós</a><br>
+        <a href="#">Doações</a><br>
+        <a href="#">Notícias</a><br>
+        <a href="#">Pontuação</a>
+      </div>
+  
+    
+      <div class="form">
+        <h3>Fale conosco</h3>
+        <p>Entra em contato com a gente qualquer coisa</p>
+        <form id="faleconosco">
+          <label for="email">EMAIL*</label><br>
+          <input type="email" id="email" placeholder="seuemail@gmail.com"><br>
+  
+          <label for="mensagem">MENSAGEM*</label><br>
+          <textarea id="mensagem" placeholder="Mensagem"></textarea><br>
+  
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+  </footer>
+
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  intent="WELCOME"
+  chat-title="Gestinho"
+  agent-id="68c15fc4-1b2f-45aa-a150-a584a565910a"
+  language-code="pt-br"
+></df-messenger>
+
 </body>
+
 </html>

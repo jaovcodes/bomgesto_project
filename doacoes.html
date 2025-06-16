@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doação</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="hero">
+      <a href="index.html" class="logo">
+        <p>BomGesto</p>
+        <img src="assets/icones/logobomgesto.png" alt="Mãos dadas" class="logo-img">
+      </a>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="doacoes.html">Doações</a></li>
+        <li><a href="pontuacao.html">Pontuações</a></li>
+        <li><a href="locais.html">Locais de doação</a></li>
+        <li><a href="login.html" id="userName">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<main class="container-doacoes">
+  <h1>Apenas um clique...</h1>
+  <p>Preencha as informações para fazer uma boa ação</p>
+
+  <form id="formDoacao">
+    <select id="categoria" required>
+      <option value="">Tipo de doação</option>
+      <option value="Comida">Comida</option>
+      <option value="Roupas">Roupas</option>
+      <option value="Brinquedos">Brinquedos</option>
+      <option value="Dinheiro">Dinheiro</option>
+      <option value="Outros">Outros</option>
+    </select>
+
+    <input type="text" id="descricao" placeholder="Descrição da doação" required />
+    <input type="tel" id="telefone" placeholder="Telefone" required />
+    <input type="text" id="endereco" placeholder="Endereço para retirada" required />
+    <input type="date" id="data" placeholder="Data para retirada" required />
+    <input type="number" id="valor" step="0.01" placeholder="Valor (R$) - opcional" />
+
+    <button type="submit">Confirmar</button>
+  </form>
+</main>
+
+      <footer class="footer">
+    <div class="container">
+    
+      <div class="contatos">
+        <h3>Contatos</h3>
+        <p>(92)9990-0000</p>
+        <p>BomGesto@gmail.com</p>
+        <a href="#">Instagram</a><br>
+        <a href="#">Facebook</a>
+      </div>
+  
+    
+      <div class="menu">
+        <h3>Menu</h3>
+        <a href="#">Sobre nós</a><br>
+        <a href="#">Doações</a><br>
+        <a href="#">Notícias</a><br>
+        <a href="#">Pontuação</a>
+      </div>
+  
+    
+      <div class="form">
+        <h3>Fale conosco</h3>
+        <p>Entra em contato com a gente qualquer coisa</p>
+        <form id="faleconosco">
+          <label for="email">EMAIL*</label><br>
+          <input type="email" id="email" placeholder="seuemail@gmail.com"><br>
+  
+          <label for="mensagem">MENSAGEM*</label><br>
+          <textarea id="mensagem" placeholder="Mensagem"></textarea><br>
+  
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+  </footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBPAy9KdIk8e34yruaL32wyj_MJANHlN2g",
+    authDomain: "bomgesto-15634.firebaseapp.com",
+    projectId: "bomgesto-15634",
+    storageBucket: "bomgesto-15634.appspot.com",
+    messagingSenderId: "672802069001",
+    appId: "1:672802069001:web:356d0b5ab9ae09d29236d8"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const userName = document.getElementById("userName");
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const uid = user.uid;
+      const docRef = doc(db, "usuarios", uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const nome = docSnap.data().nome;
+        userName.textContent = nome;
+        userName.href = "#";
+
+        userName.addEventListener('click', async () => {
+          await signOut(auth);
+          window.location.reload();
+        });
+      }
+    } else {
+      userName.textContent = "Login";
+      userName.href = "login.html";
+    }
+  });
+
+  let usuario = null;
+
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      usuario = user;
+    } else {
+      window.location.href = "login.html";
+    }
+  });
+
+  document.getElementById("formDoacao").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const categoria = document.getElementById("categoria").value;
+    const descricao = document.getElementById("descricao").value;
+    const telefone = document.getElementById("telefone").value;
+    const endereco = document.getElementById("endereco").value;
+    const data = document.getElementById("data").value;
+    const valor = parseFloat(document.getElementById("valor").value) || 0;
+
+    try {
+      const uid = usuario.uid;
+
+      // Salvar a doação na coleção geral "doacoes"
+      await addDoc(collection(db, "doacoes"), {
+        usuarios: uid,
+        categoria: categoria,
+        descricao: descricao,
+        telefone: telefone,
+        endereco: endereco,
+        data: new Date(data),
+        valor: valor,
+        timestamp: serverTimestamp()
+      });
+
+      // Atualizar pontos do usuário
+      const userRef = doc(db, "usuarios", uid);
+      const userSnap = await getDoc(userRef);
+      const pontosAtuais = userSnap.exists() ? (userSnap.data().pontos || 0) : 0;
+
+      await updateDoc(userRef, {
+        pontos: pontosAtuais + 10
+      });
+
+      alert("Doação registrada com sucesso! Você ganhou +10 pontos.");
+      document.getElementById("formDoacao").reset();
+
+    } catch (error) {
+      console.error("Erro ao registrar doação:", error);
+      alert("Erro ao registrar a doação. Tente novamente.");
+    }
+  });
+</script>
+</body>
+</html>

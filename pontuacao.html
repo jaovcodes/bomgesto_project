@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minhas Pontuações - BomGesto</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <header class="hero">
+    <a href="index.html" class="logo">
+      <p>BomGesto</p>
+      <img src="assets/icones/logobomgesto.png" alt="Mãos dadas" class="logo-img" />
+    </a>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="doacoes.html">Doações</a></li>
+        <li><a href="pontuacao.html">Pontuações</a></li>
+        <li><a href="locais.html">Locais de doação</a></li>
+        <li><a href="login.html" id="userName">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container-pontuacao">
+    <h1>Minha Pontuação</h1>
+    <p>Olá, <span id="nomeUsuario">usuário</span>! Parabéns pelas suas contribuições!</p>
+
+    <div class="grid">
+      <section class="card principal">
+        <h2>Seus Dados</h2>
+        <p>🏆 <b>Pontuação:</b> <span id="pontuacao">0</span></p>
+        <p>⭐ <b>Nível:</b> <span id="nivel">-</span></p>
+        <p>🥇 <b>Ranking:</b> <span id="ranking">-</span></p>
+        <a href="sobrepontuacao.html" class="btn">Saiba mais sobre níveis e recompensas</a>
+      </section>
+
+      <section class="card">
+        <h3>🏅 Top 5 Maiores Doadores</h3>
+        <ol id="topDoadores">
+          <li>Carregando...</li>
+        </ol>
+      </section>
+    </div>
+    
+    <section class="historico-doacoes">
+      <h2>Histórico de Doações</h2>
+      <div id="listaDoacoes">
+        <p>Carregando histórico...</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module">
+  </script>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="contatos">
+        <h3>Contatos</h3>
+        <p>(92)9990-0000</p>
+        <p>BomGesto@gmail.com</p>
+        <a href="#">Instagram</a><br />
+        <a href="#">Facebook</a>
+      </div>
+
+      <div class="menu">
+        <h3>Menu</h3>
+        <a href="#">Sobre nós</a><br />
+        <a href="#">Doações</a><br />
+        <a href="#">Notícias</a><br />
+        <a href="#">Pontuação</a>
+      </div>
+
+      <div class="form">
+        <h3>Fale conosco</h3>
+        <p>Entre em contato conosco para qualquer dúvida</p>
+        <form id="faleconosco">
+          <label for="email">EMAIL*</label><br />
+          <input type="email" id="email" placeholder="seuemail@gmail.com" /><br />
+
+          <label for="mensagem">MENSAGEM*</label><br />
+          <textarea id="mensagem" placeholder="Mensagem"></textarea><br />
+
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

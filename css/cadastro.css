@@ -5,12 +5,20 @@
   font-family: Arial, sans-serif;
 }
 
+:root {
+  --p-color: #ac1414;
+  --s-color: #fbf5eb;
+  --t-color: #ffffff;
+  --q-color: #f4e1c6;
+}
+
+
 body {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f9ecd9;
+  background-color: var(--s-color);
 }
 
 .container {
@@ -98,4 +106,20 @@ button {
   border: none;
   cursor: pointer;
   font-size: 18px;
+}
+
+
+.home-link {
+  display: block;
+  text-align: center;
+  margin-top: 25px; 
+  color: #f9ecd9;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.home-link:hover {
+  color: #ffffff;
 }
